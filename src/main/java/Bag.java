@@ -13,6 +13,10 @@ public abstract class Bag {
      *       - an int named capacity
      *       - an array of Strings named contents
      */
+    private String color;
+    private int numberOfContents;
+    private int capacity;
+    private String[] contents;
 
 
 
@@ -27,7 +31,13 @@ public abstract class Bag {
      * its contents.)
      */
 
+    public Bag(String color, int capacity){
+        this.color = color;
+        this.capacity = capacity;
+        this.numberOfContents = 0;
+        this.contents = new String[0];
 
+    }
 
 
     /*
@@ -37,17 +47,26 @@ public abstract class Bag {
      *           - getNumberOfContents
      *           - getCapacity
      */
+    public String getColor(){
+        return this.color;
+    }
 
+    public int getNumberOfContents(){
+        return this.numberOfContents;
+    }
 
+    public int getCapacity(){
+        return this.capacity;
+    }
 
 
     /*
      * TODO: Create a setter function called setColor which sets the
      *       color of this bag to the given color.
      */
-
-
-
+    public void setColor(String color){
+        this.color = color;
+    }
 
 
     /*
@@ -61,7 +80,17 @@ public abstract class Bag {
      *       and false otherwise.
      */
 
+    public boolean addItem(String item){
+        if(this.numberOfContents < capacity){
+                // add item to contents //
+            this.contents = new String[this.numberOfContents + 1];
+            this.contents[this.numberOfContents] = item;
 
+            this.numberOfContents += 1;
+            return true;
+        }
+        return false;
+    }
 
 
 
@@ -75,7 +104,24 @@ public abstract class Bag {
      *
      * @return
      */
+    public String popItem(){
+        if (this.contents.length == 0){
+            return null;
+        }
+        else{
+            String lastItem = this.contents[this.numberOfContents - 1];
+                        //        delete last item
+            this.contents[this.numberOfContents - 1] = null;
 
+//            String[] popArray = new String[this.contents.length - 1];
+//            for(int i = 0; i < popArray.length; i ++){
+//                popArray[i] = this.contents[i];
+//            }
+//            this.contents = popArray;
+            this.numberOfContents -= 1;
+            return lastItem;
+        }
+    }
 
 
 
@@ -88,6 +134,7 @@ public abstract class Bag {
     public void increaseCapacity(int n) {
         // TODO: Implement this method.
 
+        this.capacity += n;
     }
 
     /**
